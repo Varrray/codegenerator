@@ -1,0 +1,4 @@
+spring:
+  application:
+    name: codegenerator
+    description: this is application
