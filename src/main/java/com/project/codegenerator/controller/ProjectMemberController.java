@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/projects/{projectId}/members")
 public class ProjectMemberController {
         private final ProjectMemberService projectMemberService;
-        @GetMapping("/{id}")
+        @GetMapping
     public ResponseEntity<List<MemberResponse>> getProjectMembers(@PathVariable Long projectId){
             Long userId=1L;
             return ResponseEntity.ok(projectMemberService.getProjectMembers(projectId,userId));
@@ -36,9 +36,10 @@ public class ProjectMemberController {
 
         }
     @DeleteMapping("/{memberId}")
-    public ResponseEntity<MemberResponse> deleteMember(@PathVariable Long memberId,@PathVariable Long projectId){
+    public ResponseEntity<Void> removeMember(@PathVariable Long memberId,@PathVariable Long projectId){
         Long userId=1L;
-        return ResponseEntity.status(HttpStatus.CREATED).body(projectMemberService.deleteProjectMember(projectId,memberId,userId));
+        projectMemberService.removeProjectMember(projectId,memberId,userId);
+        return ResponseEntity.noContent().build();
 
     }
 
