@@ -4,6 +4,7 @@ import com.project.codegenerator.dto.project.ProjectRequest;
 import com.project.codegenerator.dto.project.ProjectResponse;
 import com.project.codegenerator.dto.project.ProjectSummaryResponse;
 import com.project.codegenerator.service.ProjectService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ProjectController {
     final ProjectService projectservice;
     @PostMapping
-    public ResponseEntity<ProjectResponse> createProject(@RequestBody ProjectRequest project){
+    public ResponseEntity<ProjectResponse> createProject(@RequestBody @Valid ProjectRequest project){
         Long userId=1L;
         return ResponseEntity.status(HttpStatus.CREATED).body(projectservice.createProject(project,userId));
 
@@ -40,7 +41,7 @@ public class ProjectController {
 
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<ProjectResponse> updateProject(@PathVariable Long id ,@RequestBody ProjectRequest project){
+    public ResponseEntity<ProjectResponse> updateProject(@PathVariable Long id ,@RequestBody @Valid ProjectRequest project){
         Long userId=1L;
         return ResponseEntity.status(HttpStatus.CREATED).body(projectservice.updateProject(id,userId,project));
 
