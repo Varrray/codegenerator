@@ -1,5 +1,10 @@
 package com.project.codegenerator.dto.project;
 
-public record ProjectRequest( String name) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+
+public record ProjectRequest(
+        @JsonProperty("name")
+        @NotBlank String name) {
 
 }
